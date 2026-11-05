@@ -1,5 +1,5 @@
-from Globals import devices
-from handelers import hDevices
+from globals import devices
+from handlers import hDevices
 
 
 hDevices.add_device("hi","1.1.1.1","PC",devices)
