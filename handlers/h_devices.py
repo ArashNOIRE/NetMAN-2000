@@ -42,15 +42,15 @@ def find_device_ip(IP, theVar):
     # Search for a device using its IP address
     for name, values in theVar.items():
         if values["IP"] == IP:
-            return name
-    return None
+            return True, name, values["Type"], values["Status"]
+    return False
 
 
 def find_device_name(Name, theVar):
     # Find a device using its name
     if Name in theVar:
-        return theVar[Name]["IP"], theVar[Name]["Type"], theVar[Name]["Status"]
-    return None
+        return True, theVar[Name]["IP"], theVar[Name]["Type"], theVar[Name]["Status"]
+    return False
 
 
 def find_devices_by_type(Type, theVar):
@@ -59,7 +59,9 @@ def find_devices_by_type(Type, theVar):
     for name, values in theVar.items():
         if values["Type"] == Type:
             result.append(name)
-    return result
+    if result:
+        return True, result
+    return False
 
 def find_devices_by_status(Status, theVar):
     # Find devices by their status
@@ -67,7 +69,9 @@ def find_devices_by_status(Status, theVar):
     for name, values in theVar.items():
         if values["Status"] == Status:
             result.append(name)
-    return result
+    if result:
+        return True, result
+    return False
 
 # - - - Changing in Devices
 
