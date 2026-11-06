@@ -10,7 +10,7 @@ def soap():
 
 def show_header():
     print("\n" + "=" * 40)
-    print("       NETWORK DEVICE MANAGER")
+    print("               NetMAN 2K")
     print("=" * 40)
 
 
