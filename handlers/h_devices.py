@@ -1,6 +1,6 @@
 import ipaddress
 
-
+# - - - Delete and Adding Devices
 def add_device(Name, IP, Type, theVar, Status="Offline"):
     # Check IP validity
     try:
@@ -25,6 +25,15 @@ def add_device(Name, IP, Type, theVar, Status="Offline"):
     }
     return True, "Device added successfully."
 
+def remove_device(Name, theVar):
+    # Check whether the device exists
+    if Name not in theVar:
+        return False, "Device not found."
+    # Remove the device from the dictionary
+    del theVar[Name]
+    return True, "Device removed successfully."
+
+# - - - Finding and Showing Devices
 
 def find_device_ip(IP, theVar):
     # Search for a device using its IP address
@@ -49,11 +58,29 @@ def find_devices_by_type(Type, theVar):
             result.append(name)
     return result
 
+def find_devices_by_status(Status, theVar):
+    # Find devices by their status
+    result = []
+    for name, values in theVar.items():
+        if values["Status"] == Status:
+            result.append(name)
+    return result
 
-def remove_device(Name, theVar):
-    # Check whether the device exists
+# - - - Changing in Devices
+
+def change_device_status(Name, Status, theVar):
+    # Check device existence
     if Name not in theVar:
         return False, "Device not found."
-    # Remove the device from the dictionary
-    del theVar[Name]
-    return True, "Device removed successfully."
+
+    # Validate new status
+    if Status not in ("Online", "Offline"):
+        return False, "Invalid device status."
+
+    # Update device status
+    theVar[Name]["Status"] = Status
+
+    return True, "Device status updated successfully."
+
+
+
