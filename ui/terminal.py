@@ -161,26 +161,28 @@ def search_menu():
 
         if choice == "1":
             Name = input("Device Name: ")
-            code, ip, device_type, status = h_devices.find_device_name(Name, devices)
-            print(f"{Name}'s IP is {ip}, it's a {device_type} and {status}." if code else "Device not found.")
+            success, ip, device_type, status = h_devices.find_device_name(Name, devices)
+            if success:    
+                print(f"{Name}'s IP is {ip}, it's a {device_type} and {status}." if success else "Device not found.")
 
         elif choice == "2":
             IP = input("IP Address: ")
-            code, name, device_type, status = h_devices.find_device_ip(IP, devices)
-            print(f"There is a device called {name} with IP address of {IP}. it's a {device_type} and {status}." if code else "Device not found.")
+            success, name, device_type, status = h_devices.find_device_ip(IP, devices)
+            if success:
+                print(f"There is a device called {name} with IP address of {IP}. it's a {device_type} and {status}." if success else "Device not found.")
 
         elif choice == "3":
             Type = input("Device Type: ")
-            code, result = h_devices.find_devices_by_type(Type, devices)
-            if code:
+            success, result = h_devices.find_devices_by_type(Type, devices)
+            if success:
                 print("Found Devices:")
                 for i, device in enumerate(result, start=1):
                     print(f"  {i}. {device}")
 
         elif choice == "4":
             Status = input("Device Status: ")
-            code, result = h_devices.find_devices_by_status(Status, devices)
-            if code:
+            success, result = h_devices.find_devices_by_status(Status, devices)
+            if success:
                 print("Found Devices:")
                 for i, device in enumerate(result, start=1):
                     print(f"  {i}. {device}")
