@@ -1,6 +1,7 @@
 from handlers import h_devices
 from globals import devices
-import os
+from handlers import h_storage
+lazy import os
 
 
 # - - - Display Functions
@@ -66,6 +67,9 @@ def add_device_ui():
         Name, IP, Type, devices
     )
 
+    if success:
+        if not h_storage.save_devices(devices):
+            print("Warning: Could not save devices to JSON.")
     print(message)
 
 
@@ -80,6 +84,9 @@ def remove_device_ui():
         return
 
     success, message = h_devices.remove_device(Name, devices)
+    if success:
+        if not h_storage.save_devices(devices):
+            print("Warning: Could not save devices to JSON.")
     print(message)
 
 
@@ -90,7 +97,9 @@ def rename_device_ui():
     success, message = h_devices.rename_device(
         OldName, NewName, devices
     )
-
+    if success:
+        if not h_storage.save_devices(devices):
+            print("Warning: Could not save devices to JSON.")
     print(message)
 
 
@@ -101,7 +110,9 @@ def change_ip_ui():
     success, message = h_devices.change_device_ip(
         Name, IP, devices
     )
-
+    if success:
+        if not h_storage.save_devices(devices):
+            print("Warning: Could not save devices to JSON.")
     print(message)
 
 
@@ -112,7 +123,9 @@ def change_type_ui():
     success, message = h_devices.change_device_type(
         Name, Type, devices
     )
-
+    if success:
+        if not h_storage.save_devices(devices):
+            print("Warning: Could not save devices to JSON.")
     print(message)
 
 
@@ -123,7 +136,9 @@ def change_status_ui():
     success, message = h_devices.change_device_status(
         Name, Status, devices
     )
-
+    if success:
+        if not h_storage.save_devices(devices):
+            print("Warning: Could not save devices to JSON.")
     print(message)
 
 
