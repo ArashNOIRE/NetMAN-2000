@@ -197,19 +197,22 @@ def search_menu():
 def show_statistics():
     total = len(devices)
 
-    online = len(
-        h_devices.find_devices_by_status("Online", devices)
+    online_result = h_devices.find_devices_by_status(
+        "Online", devices
     )
 
-    offline = len(
-        h_devices.find_devices_by_status("Offline", devices)
+    offline_result = h_devices.find_devices_by_status(
+        "Offline", devices
     )
+
+    online = len(online_result[1]) if online_result else 0
+    offline = len(offline_result[1]) if offline_result else 0
 
     print("\n===== DEVICE STATISTICS =====")
     print(f"Total Devices   : {total}")
     print(f"Online Devices  : {online}")
     print(f"Offline Devices : {offline}")
-
+    
 
 # - - - Main Terminal Loop
 
